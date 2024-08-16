@@ -1,0 +1,13 @@
+:host{
+    .container{
+        width:100%;
+        margin-top:2px;
+        .tools{
+            display: flex;
+            a{
+                margin-left:10px;
+                font-size:13px;
+            }
+        }
+    }
+}

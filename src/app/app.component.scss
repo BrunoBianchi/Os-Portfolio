@@ -1,0 +1,89 @@
+:host {
+    .desktop {
+        position: relative;
+        height: calc(100vh - 90px); /* Assumindo que a altura do navbar é 50px */
+        padding-top: 50px; /* Altura do navbar */
+        overflow: hidden;
+
+        .content {
+            width: 100%;
+            height: 100%;
+            max-height: 100%;
+        }
+        
+        .app {
+          width: 100px;
+          height: 100px;
+          text-align: center;
+          line-height: 80px;
+          position: absolute;
+          img {
+            vertical-align: middle;
+            margin: 0 auto;
+            display: inline-block;
+            
+          }
+          .caption {
+            margin-top:-35px;
+            font-size:15px;
+            display: block;
+        }
+    
+          &:hover {
+            border:1.4px dashed #90caf9;
+            background-color: #90caf92f;
+            border-radius:2px;
+            cursor:context-menu;
+          }
+        }
+      
+        .window {
+          width: 600px;
+          height: 400px;
+          background-color: #c0c0c0;
+          border-left:1.2px solid white;
+          border-bottom:1.2px solid black;
+          border-right:1.2px solid black;
+          resize: both;
+          img {
+            width:15px;
+            height: 15px;
+            margin-right:5px;
+            vertical-align: middle;
+        }
+          position: absolute;
+        }
+      
+        .ctrlbar {
+          background-color: #0700aa;
+          color:white;
+            border-top:1.2px solid white;
+    
+    
+          padding: 10px;
+          cursor: move;
+          .controlls {
+            height:100%;
+            display: flex;
+            float:right;
+            justify-content: center;
+            button {
+                width: 20px;
+                height: 20px;
+                margin-left: auto;
+                margin-right: 3px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-transform: uppercase;
+                font-weight: bold;
+                background-color: #c0c0c0;
+                border: outset 2px black;
+                cursor: pointer;
+                user-select: none; 
+            }
+          }
+        }
+      }
+      
+}
