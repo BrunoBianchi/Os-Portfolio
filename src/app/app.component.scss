@@ -1,4 +1,7 @@
 :host {
+  .minimize {
+    display: none;
+  }
     .desktop {
         position: relative;
         height: calc(100vh - 90px); /* Assumindo que a altura do navbar é 50px */
@@ -55,8 +58,8 @@
         }
       
         .ctrlbar {
-          background-color: #0700aa;
-          color:white;
+          background: rgb(0,12,125);
+          background: linear-gradient(90deg, rgba(0,12,125,1) 0%, rgba(47,108,188,1) 100%);          color:white;
             border-top:1.2px solid white;
     
     

@@ -8,6 +8,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserComponent } from './shared/components/browser/browser.component';
 import { WindowToolsComponent } from './shared/components/window-tools/window-tools.component';
+import { ChatComponent } from './shared/components/chat/chat.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { GifPickerComponent } from './shared/components/gif-picker/gif-picker.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RepositoriesGithubComponent } from './shared/components/repositories-github/repositories-github.component';
+
 
 @NgModule({
   declarations: [
@@ -15,11 +21,16 @@ import { WindowToolsComponent } from './shared/components/window-tools/window-to
     NavbarComponent,
     WindowsMenuComponent,
     BrowserComponent,
-    WindowToolsComponent
+    WindowToolsComponent,
+    ChatComponent,
+    GifPickerComponent,
+    RepositoriesGithubComponent,
   ],
   imports: [
     BrowserModule,
-    DragDropModule
+    DragDropModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()

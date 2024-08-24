@@ -1,0 +1,35 @@
+<div class="container">
+    @if(name) {
+
+    <div class="chat">
+        <ul>
+            @for (msg of messages; track $index) {
+            <li>
+                <p><span>{{msg.name}}: </span> <span [innerHTML]="msg.message"></span></p>
+            </li>
+            }
+
+        </ul>
+
+
+    </div>
+
+    <form [formGroup]="reactiveChat" (submit)="sendMessage()">
+        <input id="message" type="text" placeholder="Send a message..." formControlName="message">
+        <span class="gif" (click)="toggleGifPicker()">GIFs</span>
+        <app-gif-picker [enable]="gifPicker" (choosenGif)="onChoosenGif($event)"></app-gif-picker>
+        <button type="submit" [disabled]="!reactiveChat.valid">Send message</button>
+    </form>
+
+
+    }@else {
+    <div class="connect">
+        <p>Before we can continue. What should we call you?</p>
+        <form [formGroup]="reactiveChatLogin" (submit)="joinChat()">
+            <input type="text" placeholder="Your Name..." formControlName="name">
+            <button type="submit">Connect</button>
+        </form>
+    </div>
+    }
+
+</div>

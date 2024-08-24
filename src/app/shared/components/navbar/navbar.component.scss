@@ -47,6 +47,11 @@
         bottom:0px;
         height:30px;
         border: ridge 3px white;
+        .end{
+          float:right;
+          vertical-align: middle;
+         
+     }
         .navs {
             width:100%;
             display: flex;
@@ -58,6 +63,7 @@
                 vertical-align: middle;
                
            }
+
 
 
             .nav {

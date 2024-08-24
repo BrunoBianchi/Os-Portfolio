@@ -3,9 +3,11 @@
         <div class="navs">
             <div class="nav ">
                 <img src="https://win98icons.alexmeub.com/images/start-button.png" class="start">
+
             </div>
+
             @for(nav of nav_list;track $index) {
-            <div class="nav drag" cdkDrag>
+            <div class="nav drag" cdkDrag (click)="showWindow(nav.name)">
                 <img src="{{nav.url}}">
                 {{nav.name}}
             </div>

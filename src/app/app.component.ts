@@ -9,11 +9,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   public apps_desktop = [
-    { name: 'Browser', position: { x: 0, y: 0 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/msie1-2.png', expanded: false },
-    { name: 'Projects', position: { x: 100, y: 0 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/directory_closed-4.png', expanded: false },
-    { name: 'My CV', position: { x: 0, y: 100 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/write_wordpad-1.png', expanded: false },
-    { name: 'Online Chat', position: { x: 1000, y: 100 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/msn.png', expanded: false },
-    { name: 'Terminal', position: { x: 1000, y: 200 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/monitor_black.png', expanded: false }
+    { name: 'Browser', position: { x: 0, y: 0 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/msie1-2.png', expanded: false, 'z-index': 0 },
+    { name: 'Projects', position: { x: 100, y: 0 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/directory_closed-4.png', expanded: false, 'z-index': 0 },
+    { name: 'CV', position: { x: 0, y: 100 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/write_wordpad-1.png', expanded: false, 'z-index': 0 },
+    { name: 'Chat', position: { x: 1000, y: 100 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/msn.png', expanded: false, 'z-index': 0 },
+    { name: 'Terminal', position: { x: 1000, y: 200 }, windowOpen: false, url: 'https://win98icons.alexmeub.com/icons/png/console_prompt-0.png', expanded: false, 'z-index': 0 },
+    { name: 'Minesweeper', position: { x: 1000, y: 300 }, windowOpen: false, url: '../../../../assets/mine.png', expanded: false, 'z-index': 0 }
 
 
   ];
@@ -42,9 +43,25 @@ export class AppComponent {
         name: app.name,
         position: { x: 100, y: 100 }, // Posição inicial da janela
         url: app.url,
-        expanded: app.expanded
+        expanded: app.expanded,
+        "z-index": 9999
       });
       app.windowOpen = true;
+      if (this.openWindows.length >= 2 && this.openWindows.find((w) => w['z-index'] == 9999)) {
+        const previousWindowWithZindex = this.openWindows[this.openWindows.findIndex((window: any) => window['z-index'] == 9999)];
+        this.openWindows[this.openWindows.findIndex((window: any) => window['z-index'] == 9999)]['z-index'] = 0;
+        this.openWindows = this.openWindows.map(window => ({ ...window }));
+        const previousWindowWithZindexComponent = document.getElementById(`window-${previousWindowWithZindex.name.trim()}`);
+        if (previousWindowWithZindexComponent) {
+          previousWindowWithZindexComponent.style.zIndex = '0';
+        }
+      }
+      const window_comp = document.getElementById(`window-${app.name.trim()}`);
+      if (window_comp) {
+        window_comp!.style.zIndex = '9999';
+        app['z-index'] = 9999;
+      }
+      console.log(this.openWindows)
     }
   }
 
@@ -67,6 +84,18 @@ export class AppComponent {
 
   }
 
+  minimizeWindow(app: any) {
+    const window_comp = document.getElementById(`window-${app.name.trim()}`);
+
+    if (window_comp) {
+
+      window_comp.style.display = 'none'; // Remover qualquer transformação anterior que possa estar aplicada
+    }
+    this.openWindows[this.openWindows.findIndex((window: any) => window.name === app.name)].expanded = false;
+    this.openWindows = this.openWindows.map(window => ({ ...window }));
+
+  }
+
 
   closeWindow(window: any) {
     this.openWindows = this.openWindows.filter(w => w !== window);
@@ -74,6 +103,35 @@ export class AppComponent {
     if (app) {
       app.windowOpen = false;
       app.expanded = false;
+    }
+  }
+
+  toggleWindow(navName: string) {
+    const window_comp = document.getElementById(`window-${navName.trim()}`);
+    if (window_comp) {
+      if (window_comp.style.display != 'none') {
+        window_comp.style.display = 'none';
+      } else {
+        window_comp.style.display = 'initial'; // Remover qualquer transformação anterior que possa estar aplicada
+
+      }
+    }
+  }
+
+  changeZIndex(windowName: string) {
+    if (this.openWindows.length >= 2 && this.openWindows.find((w) => w['z-index'] == 9999)) {
+      const previousWindowWithZindex = this.openWindows[this.openWindows.findIndex((window: any) => window['z-index'] == 9999)];
+      this.openWindows[this.openWindows.findIndex((window: any) => window['z-index'] == 9999)]['z-index'] = 0;
+      this.openWindows = this.openWindows.map(window => ({ ...window }));
+      const previousWindowWithZindexComponent = document.getElementById(`window-${previousWindowWithZindex.name.trim()}`);
+      if (previousWindowWithZindexComponent) {
+        previousWindowWithZindexComponent.style.zIndex = '0';
+      }
+    }
+    const window_comp = document.getElementById(`window-${windowName.trim()}`);
+    if (window_comp) {
+      window_comp!.style.zIndex = '9999';
+      this.openWindows[this.openWindows.findIndex((window: any) => window.name == windowName)]['z-index'] = 9999;
     }
   }
 }

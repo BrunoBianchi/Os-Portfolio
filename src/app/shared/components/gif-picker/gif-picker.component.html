@@ -1,0 +1,12 @@
+@if(enable) {
+<div class="container">
+    <div class="search">
+        <input type="text" placeholder="Search Tenor GIFs" (keyup)="triggerSearch($event)">
+        <div class="content">
+            @for (gif of gifs; track $index) {
+            <img (click)="upLoadGif(gif.media[0].gif.url)" [src]="gif.media[0].gif.url">
+            }
+        </div>
+    </div>
+</div>
+}

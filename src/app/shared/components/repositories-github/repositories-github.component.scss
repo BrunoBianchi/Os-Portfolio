@@ -1,0 +1,35 @@
+:host {
+    .repos{
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        width:100%;
+        max-height: 80%;
+        overflow: auto;
+        .repo {
+            width: 145px;
+            height: 100px;
+            text-align: center;
+            line-height: 80px;
+            img {
+              vertical-align: middle;
+              margin: 0 auto;
+              display: inline-block;
+              
+            }
+            .caption {
+              margin-top:-30px;
+              font-size:15px;
+              display: block;
+          }
+      
+            &:hover {
+              border:1px dashed #90caf9;
+              background-color: #90caf92f;
+              border-radius:2px;
+              cursor:context-menu;
+            }
+        }
+
+      }
+}

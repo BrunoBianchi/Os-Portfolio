@@ -1,0 +1,12 @@
+<div class="repos">
+    @for (repo of repos; track $index) {
+    <div class="repo">
+        <img src="https://win98icons.alexmeub.com/icons/png/directory_closed-4.png">
+        <span class="caption">{{repo.name}}</span>
+    </div>
+
+
+    }@empty {
+    <p>Loading....</p>
+    }
+</div>

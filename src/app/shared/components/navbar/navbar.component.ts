@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +8,13 @@ import { Component, Input } from '@angular/core';
 })
 export class NavbarComponent {
   @Input() public nav_list: Array<any> = [];
-
+  @Output() public toggleWindowEvent: EventEmitter<any> = new EventEmitter();
   drop(event: CdkDragDrop<string[]>) {
     console.log(event)
     moveItemInArray(this.nav_list, event.previousIndex, event.currentIndex);
+  }
+
+  showWindow(nav: string) {
+    this.toggleWindowEvent.emit(nav)
   }
 }

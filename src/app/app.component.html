@@ -1,4 +1,4 @@
-<app-navbar [nav_list]="openWindows"></app-navbar>
+<app-navbar [nav_list]="openWindows" (toggleWindowEvent)="toggleWindow($event)"></app-navbar>
 <div class="desktop">
     @for (app of apps_desktop; track $index) {
     <div class="app" cdkDrag [cdkDragFreeDragPosition]="app.position" (cdkDragEnded)="onDragEnd($event, app)"
@@ -8,23 +8,27 @@
     </div>
     }
     @for (window of openWindows; track $index) {
-    <div id="window-{{window.name.trim()}}" class="window" cdkDrag [cdkDragFreeDragPosition]="window.position">
+    <div id="window-{{window.name.trim()}}" class="window" cdkDrag [cdkDragFreeDragPosition]="window.position"
+        (cdkDragMoved)="changeZIndex(window.name)" (click)="changeZIndex(window.name)">
         <div class="ctrlbar" cdkDragHandle>
             <img src="{{window.url}}"> {{ window.name }}
             <div class="controlls">
-                <button (click)="closeWindow(window)"><i class="fa-solid fa-window-minimize"></i></button>
+                <button (click)="minimizeWindow(window)"><i class="fa-solid fa-window-minimize"></i></button>
                 <button (click)=" maximizeWindow(window)"><i class="fa-regular fa-window-maximize"></i></button>
                 <button (click)="closeWindow(window)"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
-        <div class="content">
+        <div class="content" (click)="changeZIndex(window.name)">
             <app-window-tools [windowType]="window.name"></app-window-tools>
             @switch (window.name) {
             @case ('Browser') {
             <app-browser [window]="window"></app-browser>
             }
-            @case ('') {
-
+            @case ('Chat') {
+            <app-chat></app-chat>
+            }
+            @case ('Projects') {
+            <app-repositories-github />
             }
             }
         </div>
